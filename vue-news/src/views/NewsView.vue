@@ -1,29 +1,30 @@
 <template>
   <div>
-    <div v-for="user in users" :key="user.id">
-      {{ user }}
+    <div v-for="user in this.$store.state.news" :key="user.id">
+      {{ user.title }}
     </div>
   </div>
 </template>
 
 <script>
-import { fetchNewsList } from "../api/index.js";
+// import { fetchNewsList } from "../api/index.js";
 
 export default {
-  data() {
-    return {
-      users: [],
-    };
-  },
+  // data() {
+  //   return {
+  //     users: [],
+  //   };
+  // },
   created() {
-    fetchNewsList()
-      .then((res) => {
-        console.log(res);
-        this.users = res.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.$store.dispatch('FETCH_NEWS');
+    // fetchNewsList()
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.users = res.data;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   },
 };
 </script>
